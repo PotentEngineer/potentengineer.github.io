@@ -21,7 +21,7 @@
 title: PotentEngineer
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  My blog to share knowledge around Intune, ConfigMgr, Windows, Browsers, PowerShell and all things Windows OS management. 
+  My personal SysAdmin blog
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: potentengineer
