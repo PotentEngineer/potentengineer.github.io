@@ -29,6 +29,7 @@ github_username: potentengineer
 
 # Build settings
 theme: jekyll-theme-midnight
+future: true
 
 plugins:
   - jekyll-feed
