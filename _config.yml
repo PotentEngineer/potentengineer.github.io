@@ -30,6 +30,7 @@ github_username: potentengineer
 # Build settings
 theme: jekyll-theme-midnight
 future: true
+github: [metadata]
 
 plugins:
   - jekyll-feed
