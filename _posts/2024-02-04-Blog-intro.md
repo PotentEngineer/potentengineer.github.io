@@ -14,4 +14,6 @@ My old blog was self-hosted on Wordpress, via [potentengineer.com](http://www.po
 
 -Daniel
 
+<!--more-->
+
 ![](/images/Microsoft-System-Center-Configuration-Manager-logo%20-%20Copy.png)

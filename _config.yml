@@ -31,6 +31,7 @@ github_username: potentengineer
 theme: jekyll-theme-midnight
 future: true
 github: [metadata]
+excerpt_separator: <!--more-->
 
 plugins:
   - jekyll-feed
