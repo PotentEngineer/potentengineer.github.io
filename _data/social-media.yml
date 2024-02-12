@@ -1,0 +1,35 @@
+linkedin:
+  id: 'ratliffdaniel'
+  href: 'https://www.LinkedIn.com/in/'
+  title: 'LinkedIn'
+  fa-icon: 'fa-brands fa-linkedin-square fa-xl'
+
+twitter:
+  id: 'PotentEngineer'
+  href: 'https://www.twitter.com/'
+  title: 'Twitter/X'
+  fa-icon: 'fa-brands fa-twitter-square fa-xl'
+
+bluesky:
+  id: 'potentengineer.bsky.social'
+  href: 'https://bsky.app/profile/'
+  title: 'BlueSky'
+  fa-icon: 'fa-comment fa-xl'
+
+mastadon:
+  id: '@PotentEngineer'
+  href: 'https://techhub.social/'
+  title: 'Mastodon'
+  fa-icon: 'fa-brands fa-mastodon fa-xl'
+
+reddit:
+  id: 'PotentEngineer'
+  href: https://www.reddit.com/user/
+  title: 'Reddit'
+  fa-icon: 'fa-brands fa-reddit fa-xl'  
+
+github:
+  id: 'PotentEngineer'
+  href: 'https://github.com/'
+  title: 'GitHub'
+  fa-icon: 'fa-brands fa-github-square fa-xl'
