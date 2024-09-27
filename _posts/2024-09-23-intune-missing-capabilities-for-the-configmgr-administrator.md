@@ -3,11 +3,11 @@ title: Intune missing capabilities for the ConfigMgr administrator
 description: This is my running list of capabilities that ConfigMgr delivers but Intune does not.
 date: 2024-09-24T01:00:53.651Z
 preview: ""
-tags: []
-categories:
-    - intune
+tags:
     - configmgr
-draft: true
+    - intune
+categories: []
+draft: false
 ---
 # Intune missing capabilities for the ConfigMgr administrator
 
