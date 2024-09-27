@@ -11,7 +11,7 @@ draft: false
 ---
 # Intune missing capabilities for the ConfigMgr administrator
 
-Even if you haven't been paying attention to recent development or lack thereof Microsoft Configuration Manager or to any of the threads on Twitter/X, Reddit, or any other major social media platforms, you still probably know the writing is on the wall for ConfigMgr. Nearly all focus in Contosoland has been devoted to Intune. 
+Even if you haven't been paying attention to recent development for, or lack thereof, Microsoft Configuration Manager, or to any of the threads on Twitter/X, Reddit, or any other major social media platforms, you still probably know the writing is on the wall for ConfigMgr. Nearly all focus in Contosoland has been devoted to Intune. 
 
 This post outlines my personal running list of gaps that Intune doesn't quite cover for the seasoned ConfigMgr administrator. 
 
@@ -19,9 +19,9 @@ My friend and banter extraordinaire, Bryan Dam, [posted recently](https://x.com/
 
 *#ConfigMgr gave you 250% of what you need. #Intune gives you 90%, we'll get it to 100% ... eventually.*
 
-Much of this list may be in the last 150%, but that doesn't change a lot of organizations' business requirements. Make your own determination how critical these capabilities are for your organization. 
+Much of this list may be in the last 150%, but that doesn't change a lot of organizations' dependency on these capabilities. Make your own determination how critical these capabilities are for your organization. 
 
-[Kim Oppalfens](https://x.com/thewmiguy) has the [best write up]( https://www.oscc.be/sccm/configmgr/Making-the-case-for-cloud-attach-and-co-management/) I have seen to date of these gaps at a higher capability level. 
+[Kim Oppalfens](https://x.com/thewmiguy) has the [best write up]( https://www.oscc.be/sccm/configmgr/Making-the-case-for-cloud-attach-and-co-management/) I have seen to date of these gaps. 
 
 - Realtime scripts
 - Realtime application installation
@@ -39,7 +39,7 @@ My list includes a few more technical gaps ranging from critical to minor techni
 ### Software installation
 For the majority of your software installations, Intune should cover your needs. But the following requirements may pose an issue. 
 * **Sequencing complex installs together** - Need to deploy multiple installs in a certain order or tie in installs, scripts, and restarts at once? Complex installs like Citrix VDA or sometimes Windows Feature Upgrades are easily handled with ConfigMgr task sequences. No equivalent in Intune without complex PowerShell scripting. 
-* **30GB maximum package size** - This may pose an issue for things like Visual Studio, AutoCAD, SAS, and other very large applications. Your best option is to compress the install files into a .zip or .wim file and extract them at install time. 
+* **30GB maximum package size** - This isn't even that new. This capability was bumped from 8GB to 30Gb around the [start of 2024](https://learn.microsoft.com/en-us/mem/intune/apps/apps-win32-app-management#add-assign-and-monitor-a-win32-app). This may pose an issue for things like Visual Studio, AutoCAD, SAS, and other very large applications. Your best option is to compress the install files into a .zip or .wim file and extract them at install time. 
 * **IME runs as 32-bit not 64-bit** - For the majority of software installs, this is no issue. Windows Installer is intelligent enough to install 64-bit to 64-bit, even when called from a 32-bit process. However, if you use PowerShell to wrap your installs, such as the ever popular PowerShell Application Deployment Toolkit, you have to take extra steps to trigger the process as 64-bit. Not ideal, especially if you wrap all things in PSADT. 
 
 ### Shared device scenarios
@@ -60,10 +60,10 @@ We all know that for modern endpoint management you generally want to target use
 * **Targeting based off software usage/metering** - Very valuable for software audits, license reclamation, and other software lifecycle scenarios. 
 * **Targeting based off registry keys** - How many software applications do you have that store relevant info in the registry? Zscaler Private Access, Digital Guardian, lots of others. Inventory the registry keys, build a collection to target. 
 * **Targeting based off WMI properties** - We have almost 100 custom inventory items we store in WMI to solve all our targeting wildest dreams. Drivers, some user profile specific registry key, custom branding, the list goes on. 
-* **Targeting based off management properties (domain, co-managed workload, etc)** - This is mostly used for limiting deployments to relevant endpoints. Only want to target your Entra ID joined devices? Only hybrid joined? Only devices in a certain domain? All very valuable scenarios to ensure you limit exposure to devices that should only be targeted. 
+* **Targeting based off management properties (domain, co-managed workload, etc)** - This is mostly used for limiting deployments to relevant endpoints. Only want to target your Entra ID joined devices? Only hybrid joined? Only devices in a certain domain? All very valuable scenarios to ensure you limit exposure to devices that should not be targeted. 
 * **Targeting null data such as software not installed** - This is valuable for cleaning up your environment. Missing a required configuration or devices that should have X software installed? 
 * **Targeting based off policies (compliant, non-compliant, success, error, etc)** - If a software install fails, it will reattempt. What if you need to target a script to a device that failed to apply a config policy successfully? What if you need to apply a script to a non-compliant device?
 * **Targeting based off user state (user logged on, primary user set, etc)** - One of the easiest ways to ensure you are not impacting an end user is if they are not logged into their device. This is great for overnight implementations and critical cleanup tasks. Being able to see the primary user of a device like with user device affinity in ConfigMgr is very valuable here. Great info for cross checking asset management systems and targeting users with multiple devices or accounts that login to multiple users devices. 
 
 ## Closing
-This is a lengthy list, and I have been keeping this list since we co-managed all our devices at the start of the pandemic in 2020. The good news is even just a year ago, this last had 5 more items. Many of these items are dropping off with every monthly Intune release and eventually Microsoft will get that last 10%. I personally expect co-management will still be necessary for the next 5 years. We shall see. 
+This is a lengthy list, and I have been keeping this list since we co-managed all our devices at the start of the pandemic in 2020. The good news is even just a year ago, this last had 5 more items. Many of these items are dropping off with every monthly Intune release and eventually Microsoft will get that last 10%. I personally expect co-management will still be necessary for the next 5 years though, we shall see. 
