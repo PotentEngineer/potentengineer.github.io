@@ -12,5 +12,6 @@
       "title": "_posts",
       "path": "[[workspace]]/_posts"
     }
-  ]
+  ],
+  "frontMatter.website.host": "https://potentengineer.com/"
 }
