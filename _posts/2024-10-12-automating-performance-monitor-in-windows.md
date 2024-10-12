@@ -24,7 +24,7 @@ Earlier this year I came across a scenario of an application dropping connection
 We use ConfigMgr to run scripts on workstations from a central location and it worked well in this scenario. 
 
 ## Initial setup process
-1. In Performance Monitor (perfmon.msc), create the necessary [Data Collector Set](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/create-data-collector-performance-counters)
+1. In Performance Monitor (perfmon.msc), create the necessary [Data Collector Set](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/create-data-collector-performance-counters), henceforth abbreviated DCS
    1. Be sure to specify the directory you want your output in
 2. Export the DCS you created. Right-click and Save template to .xml.
 3. Download Start-PerfmonCapture.ps1 linked below
@@ -41,12 +41,21 @@ This script is fairly basic, mostly just took figuring out how to interact with 
 
 Special thanks to [Aussie Rob SQL](https://www.aussierobsql.com/), [Jonathan Medd](https://www.jonathanmedd.net/), and [Rabi Achrafi](https://rabiachrafi.wordpress.com/) for the example scripts I found online. References are in the script help text. Also thanks to my co-workers Darren Chinnon and Raul Colunga who helped put this together.
 
+#### Script anatomy
+1. Populate the XML for the Data Collector Set
+2. Specify name of DCS
+3. Query if DCS already exists with specified name
+5. If DCS found, check if running
+   1. If running, exit
+   2. If not running, start it
+6. If DCS not found, create it and start it
+
 Edit the lines below to personalize as needed
 
 - Line 27 through 210 - Your custom XML
 - Line 212 - DCS name
 
-#### Preview
+#### Partial Preview
 ```powershell
 $DCSName = 'PerfMonExample'
 $DCSCheck = & logman query $DCSName # Query if DCS already exists
