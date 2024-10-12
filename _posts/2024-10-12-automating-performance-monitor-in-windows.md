@@ -11,7 +11,7 @@ categories: []
 
 This post is the first of three for automating common debugging tools on Windows endpoints. 
 
-- Automating Performance Monitor in Windows
+- [Automating Performance Monitor in Windows](https://potentengineer.com/2024/10/12/automating-performance-monitor-in-windows.html)
 - Automating Wireshark in Windows
 - Automating Process Monitor in Windows
 
