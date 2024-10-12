@@ -27,7 +27,7 @@ We use ConfigMgr to run scripts on workstations from a central location and it w
 4. Copy the contents of the .xml into below script so no artifacts are necessary outside of the script. It is self-contained.
 5. Add a Run Script to ConfigMgr to be ran on devices, Start-PerfmonCapture
 6. Add the column for Script GUID to the ConfigMgr console and copy it out
-   1. ![](/images/ConfigMgrScriptGUID.png)
+   1. ![](/assets/images/ConfigMgrScriptGUID.png)
 7. Create collection of target devices
 8. Trigger the Run script each morning at a specified time on target workstations to create and start the DCS using the [Invoke-CMScript](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/invoke-cmscript?view=sccm-ps) cmdlet. I used Azure Automation to trigger this daily and re-run hourly to ensure the DCS was always running. You can use any automation solution you prefer
    1. `Invoke-CMScript -CollectionId <CollectionId> -ScriptGuid <scriptguid>`
@@ -48,10 +48,10 @@ Edit the lines below to personalize as needed
 The script gives a little output for validation, not much though. This is mostly for validation during testing.
 
 Starting the script, there may be additional output from logman.exe for the initial run
-![](/images/PerfmonStart1.png)
+![](/assets/images/PerfmonStart1.png)
 
 Starting the script when DCS is already running
-![](/images/PerfmonStart2.png)
+![](/assets/images/PerfmonStart2.png)
 
 Starting the script when DCS is not running
-![](/images/PerfmonStart3.png)
+![](/assets/images/PerfmonStart3.png)
