@@ -2,7 +2,7 @@
 title: Automating Performance Monitor in Windows
 description: For advanced scenarios where you need to automate running Perfmon at scale
 date: 2024-10-12T19:16:49.784Z
-preview: /images/PreviewAutomatingPerfmon.png
+preview: /assets/images/PreviewAutomatingPerfmon.png
 tags:
     - windows
     - perfmon
