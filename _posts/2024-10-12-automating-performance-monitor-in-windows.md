@@ -4,9 +4,10 @@ description: For advanced scenarios where you need to automate running Perfmon a
 date: 2024-10-12T19:16:49.784Z
 preview: /assets/images/PreviewAutomatingPerfmon.png
 tags:
-    - windows
-    - perfmon
-    - powershell
+   - perfmon
+   - powershell
+   - windows
+   - configmgr
 categories: []
 ---
 
