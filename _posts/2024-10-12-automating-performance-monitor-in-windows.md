@@ -74,7 +74,7 @@ if ($DCSCheck[1] -like "*$($DCSName)") {
 }
 ```
 
-Github Link: [==Start-PerfmonCapture.ps1==](https://github.com/PotentEngineer/LabScripts/blob/master/Applications/Start-PerfmonCapture.ps1)
+Github Link: [Start-PerfmonCapture.ps1](https://github.com/PotentEngineer/LabScripts/blob/master/Applications/Start-PerfmonCapture.ps1)
 
 ## Output
 The script gives a little output for validation, not much though. This is mostly for validation during testing.
