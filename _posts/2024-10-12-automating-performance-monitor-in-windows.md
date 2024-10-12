@@ -23,7 +23,7 @@ Earlier this year I came across a scenario of an application dropping connection
 
 We use ConfigMgr to run scripts on workstations from a central location and it worked well in this scenario. 
 
-### Initial setup process
+## Initial setup process
 1. In Performance Monitor (perfmon.msc), create the necessary [Data Collector Set](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/create-data-collector-performance-counters)
    1. Be sure to specify the directory you want your output in
 2. Export the DCS you created. Right-click and Save template to .xml.
@@ -36,19 +36,47 @@ We use ConfigMgr to run scripts on workstations from a central location and it w
 8. Trigger the Run script each morning at a specified time on target workstations to create and start the DCS using the [Invoke-CMScript](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/invoke-cmscript?view=sccm-ps) cmdlet. I used Azure Automation to trigger this daily and re-run hourly to ensure the DCS was always running. You can use any automation solution you prefer
    1. `Invoke-CMScript -CollectionId <CollectionId> -ScriptGuid <scriptguid>`
 
-### The script
+## The script
 This script is fairly basic, mostly just took figuring out how to interact with a Data Collector Set using logman.exe and make sure it didn't clobber the existing DCS that is running.
 
-Special thanks to [Aussie Rob SQL](https://www.aussierobsql.com/), [Jonathan Medd](https://www.jonathanmedd.net/), and [Rabi Achrafi](https://rabiachrafi.wordpress.com/) for the example scripts I found online. References are in the script help text.
+Special thanks to [Aussie Rob SQL](https://www.aussierobsql.com/), [Jonathan Medd](https://www.jonathanmedd.net/), and [Rabi Achrafi](https://rabiachrafi.wordpress.com/) for the example scripts I found online. References are in the script help text. Also thanks to my co-workers Darren Chinnon and Raul Colunga who helped put this together.
 
 Edit the lines below to personalize as needed
 
 - Line 27 through 210 - Your custom XML
 - Line 212 - DCS name
 
-[Start-PerfmonCapture.ps1](https://github.com/PotentEngineer/LabScripts/blob/master/Applications/Start-PerfmonCapture.ps1)
+#### Preview
+```powershell
+$DCSName = 'PerfMonExample'
+$DCSCheck = & logman query $DCSName # Query if DCS already exists
 
-### Output
+if ($DCSCheck[1] -like "*$($DCSName)") {
+    Write-Output 'DCS found!'
+	if ($DCSCheck[2] -like '*Running') {
+		Write-Output 'Trace running, exiting...'
+	} else {
+		Write-Output 'Trace not running, starting...'
+		& logman start $DCSName
+	}
+} else {
+    Write-Output 'DCS not found, creating...'
+    
+    # Create the Data Collector Set
+    $DCS = New-Object -COM Pla.DataCollectorSet
+    $DCS.DisplayName = $DCSName
+    $DCS.SetXml($DCSTemplate)
+    $DCS.Commit("$DCSName" , $null , 0x0003)
+
+    # Start the data collection
+    Write-Output 'Starting the DCS!'
+    $DCS.start($false)
+}
+```
+
+Github Link: [==Start-PerfmonCapture.ps1==](https://github.com/PotentEngineer/LabScripts/blob/master/Applications/Start-PerfmonCapture.ps1)
+
+## Output
 The script gives a little output for validation, not much though. This is mostly for validation during testing.
 
 Starting the script, there may be additional output from logman.exe for the initial run
@@ -59,3 +87,6 @@ Starting the script when DCS is already running
 
 Starting the script when DCS is not running
 ![](/assets/images/PerfmonStart3.png)
+
+## Closing
+Overall, this process worked well and met the need. It wasn't the first time I had to use Perfmon and it won't be the last. Up next, Wireshark.
