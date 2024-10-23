@@ -94,9 +94,10 @@ if (Test-Path 'C:\Program Files\Wireshark\Wireshark.exe') { # Check if Wireshark
         Write-Warning 'Wireshark is already running, not starting a new instance!'
     }
 }
+```
 
 Github link: [Start-WiresharkCapture.ps1](https://github.com/PotentEngineer/LabScripts/blob/master/Applications/Start-WireSharkCapture.ps1)
-```
+
 ## Output
 Starting Wireshark for the first time
 ![](/assets/images/WiresharkStart1.png)
