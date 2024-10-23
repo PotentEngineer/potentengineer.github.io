@@ -21,6 +21,7 @@ This post is the second of three for automating common debugging tools on Window
 - Automating Process Monitor in Windows
 
 From the prior post:
+
 *Earlier this year I came across a scenario of an application dropping connections. This was occuring across many hundreds of users and sporadically. Typically, I would attempt to recreate the issue so I could debug, but that was not possible here. I needed a way to be ready for the drop to occur and have all debugging tools setup proactively across a large number of users.*
 
 *We use ConfigMgr to run scripts on workstations from a central location and it worked well in this scenario.*
@@ -54,7 +55,7 @@ Again, special thanks to my co-workers Darren Chinnon and Raul Colunga for the h
    2. Start Wireshark following the logic above in step #4
 
 #### Partial Preview
-```PowerShell
+```powershell
 if (Test-Path 'C:\Program Files\Wireshark\Wireshark.exe') { # Check if Wireshark is installed
     if (!(Test-Path c:\temp\capture)) { # Check if c:\temp\capture exists
         New-Item -Path c:\temp -Name capture -ItemType Directory -Force # Create capture directory
