@@ -42,6 +42,15 @@ This automation was not difficult to setup. The [programmatic capabilities](http
 
 Again, special thanks to my co-workers Darren Chinnon and Raul Colunga for the help on this one.
 
+Wireshark paremeters
+- Start WireShark trace
+- RingBuffer: 4
+- File size: 100 MB
+- Start capture immediately
+- Save .pcappng to c:\temp\capture
+
+Customize the Wireshark parameters on line 53 and 68.
+
 #### Script anatomy
 1. Check for Wireshark.exe in default path
 2. Check for c:\temp\capture path and create if necessary
@@ -50,7 +59,7 @@ Again, special thanks to my co-workers Darren Chinnon and Raul Colunga for the h
    1. Gather the network interface alias of the interface running DHCP and connected
    2. Concatenate the Wireshark process with the network interface alias
    3. Start Wireshark with the identified alias
-4. If Wireshark is running, check process count >=2
+5. If Wireshark is running, check process count >=2
    1. If multiple processes running, kill processes
    2. Start Wireshark following the logic above in step #4
 
