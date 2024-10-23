@@ -13,6 +13,7 @@ draft: true
 ---
 
 # Automating Wireshark in Windows
+
 This post is the second of three for automating common debugging tools on Windows endpoints. 
 
 - [Automating Performance Monitor in Windows](https://potentengineer.com/2024/10/12/automating-performance-monitor-in-windows.html)
