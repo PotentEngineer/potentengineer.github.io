@@ -38,7 +38,7 @@ This is where running this with ConfigMgr becomes convenient. Just target a coll
 ## The script
 This automation was not difficult to setup. The [programmatic capabilities](https://www.wireshark.org/docs/wsug_html_chunked/ChCustCommandLine.html) of Wireshark made it fairly easy. The biggest challenge was cleanly ending the Wireshark processes and restarting, then ensuring only one instance was running at a time so that a capture was taken at all times.
 
-Again, special thanks to my co-workers Darren Chinnon and Raul Colunga for the help on the one.
+Again, special thanks to my co-workers Darren Chinnon and Raul Colunga for the help on this one.
 
 #### Script anatomy
 1. Check for Wireshark.exe in default path
@@ -97,10 +97,10 @@ Github link: [Start-WiresharkCapture.ps1](https://github.com/PotentEngineer/LabS
 ```
 ## Output
 Starting Wireshark for the first time
-![](/images/WiresharkStart1.png)
+![](/assets/images/WiresharkStart1.png)
 
 Starting Wireshark when it is already running or running multiple instances
-![](/images/WiresharkStart2.png)
+![](/assets/images/WiresharkStart2.png)
 
 ## Closing
 This script was a bit more of a challenge than the Perfmon script, but allowed Wireshark to capture all network traffic at all times. This lead to the resolution of the issue we were experiencing, so it paid off. 
