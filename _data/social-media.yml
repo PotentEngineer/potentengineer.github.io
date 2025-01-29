@@ -4,12 +4,6 @@ linkedin:
   title: 'LinkedIn'
   fa-icon: 'fa-brands fa-linkedin-square fa-xl'
 
-twitter:
-  id: 'PotentEngineer'
-  href: 'https://www.twitter.com/'
-  title: 'Twitter/X'
-  fa-icon: 'fa-brands fa-twitter-square fa-xl'
-
 bluesky:
   id: 'potentengineer.bsky.social'
   href: 'https://bsky.app/profile/'
