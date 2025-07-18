@@ -5,9 +5,9 @@ linkedin:
   fa-icon: 'fa-brands fa-linkedin-square fa-xl'
 
 bluesky:
-  id: 'potentengineer.bsky.social'
+  id: 'potentengineer.com'
   href: 'https://bsky.app/profile/'
-  title: 'BlueSky'
+  title: 'Bluesky'
   fa-icon: 'fa-comment fa-xl'
 
 mastadon:
