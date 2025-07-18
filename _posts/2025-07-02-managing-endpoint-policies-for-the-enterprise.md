@@ -20,6 +20,20 @@ My next big lesson was not to modify active production deployments. I was helpin
 
 These lessons, along with many others, have shaped the robust set of practices outlined below. Our teams apply these practices across multiple endpoint management tools to minimize risk, avoid impacting user experiences, and prevent outages. Whether we’re using Group Policy, Intune, ConfigMgr, JAMF, or other tools, these guidelines help keep everything running smoothly.
 
+# Summary
+This is a very lengthy post, but I did not want to separate it into multiple posts, so here is a summary of the major points. 
+- Always test scripts and avoid modifying active production deployments to prevent outages.
+- Use lower environments that closely mirror production for safe testing.
+- Deploy policies gradually using pilots, rings, and maintenance windows; prioritize critical endpoints last.
+- Apply least privilege and separation of duties to minimize risk from human error.
+- Document all processes and metrics to ensure awareness and enforce standards.
+- Use change control (e.g., ITIL) to manage and simplify changes.
+- Automate repetitive or error-prone steps to reduce mistakes.
+- Inventory and analyze your environment before making changes; use multiple tools for complete visibility.
+- Only implement changes when truly necessary, using data to guide decisions.
+- Prepare all scripts, paperwork, and communications before implementation.
+- Validate changes thoroughly, ideally by a separate person, and use tools to confirm success across all targeted devices.
+
 # Environment setup
 ### Lower environments
 - Test, Dev, Staging, Int, QA - Whatever you want to call it, setup a lower environment. It is up to you whether you need one or many. 
@@ -75,7 +89,8 @@ Here are a few examples of easily missed implementation steps where automation c
 For mature environments, don't touch prod, use Continuous Integration/Continuous Deployment (CI/CD) pipelines. Human's make the changes in the lower environment, scripts turn them to Prod. There are some great tools to help with this like [IntuneCD](https://almenscorner.github.io/IntuneCD/) (Tobias Almén) and [M365DSC](https://microsoft365dsc.com/) (Microsoft). 
 ### Implementation preperation 
 Data and visibility are key to helping eliminate unknowns and reduce risk. If you need to change software or configurations, first inventory your environment to see what it looks like currently. Do not rely on assumptions or accept unknowns where possible.
-##### Tooling
+
+#### Tooling
 There are many tools that can provide visibility into your environment and help decision making. Use them. Many environments have the tools in place but they are highly underutilized. 
 - Endpoint Management tools - ConfigMgr, Intune, JAMF, Workspace One, and others
   - Inventory of software, files, settings, and more
@@ -101,19 +116,21 @@ Sometimes data in one tool might be incomplete or even inconsistent, cross-refer
 - I need to see users who visited a website to build an accurate user list. I can use Nexthink for site visits, but I need page details. I can get that from Dynatrace. Using both paints the complete picture. 
 - I need to see plug and play events for USB devices. Event log data in Splunk has some details, but Defender exposes more events. 
 
-##### Determining the need for change
+#### Determining the need for change
 What is better than covering all your bases and having a flawless implementation? Not need to implement that change in the first place. Use the tools above to make the most educated decisions. You may not need to introduce as much risk or potential impact as you expected. I have had many direct experiences where data saved the day and prevented change. For well-planned changes this is helpful, but it also can save the day in emergency situations. Below are a couple examples. 
 - Review software installations and usage. How many users have this installed? Of that, how many actually use it? This data alone can help determine the need for change. 
   - e.g.) We recently did an exercise to reduce the software load in our base image. We found a few of the applications were used by less than 5% of our users, even though business leaders claimed these applications were critical and had high usage. The data won out.
 - Use tools at your disposal to query registry, WMI, files and folders, and many other things to determine the need for change. 
   - e.g.) A few years back we were looking to make a browser change. I used CMPivot to query the specific registry key and found over 2/3 of our environment already had it set because Microsoft had turned it on by default. Now we knew there was little risk to implement on the remaining 1/3. 
-##### Preparing for implementation
+
+#### Preparing for implementation
 When you are ready to move forward with implementing something new, save future you some trouble, and do as much preperation as possible before you implement. This means preparing the actual scripts, paperwork, and the actual change beforehand. If you are scheduled to implement at 7pm, do not sign-on at 7pm and start getting everything prepped. Do it the day before or the day of, so that implementation can be just that and nothing more. 
 - Schedule deployments beforehand, where possible. Most endpoint management tools nowadays allow you to do this. 
 - Prepare all paperwork beforehand, such as documentation, change controls, and communications to end users or stakeholders.
 - Manage your time. If your sign-off at 5pm, do you have a reminder or calendar entry to alert you to sign-on at 7pm? This one is more important the more extreme the implementation time is. Some organizations require changes at 2am or on Saturdays, or even variable times based on lowest usage points. 
 - Ensure you have all the support you need. Should a co-worker be there? Do you have a separate person handling validation? Should the vendor be on the call? Early on, when we used to do our ConfigMgr upgrades, we always had our Microsoft PFE/DSE/CSE on with us in case of issues. 
 - If you are automating certain steps, please write that script up before implementation starts. You never know when that 5 minute task will turn into a 60 minute ball of frustration. 
+
 ### Validation
 Validation is ensuring that your change was successful. Successful means that it did what you expected it to. You can successfully install software and also have unforeseen negative impacts. 
 - Validation is always best done by a separate person. Ideally, the requestor for the change should handle validation. They are the ones that must be happy in the end. This will depend on whether they are another person in IT, have permissions to validate, and other environmental circumstances. 
@@ -121,19 +138,6 @@ Validation is ensuring that your change was successful. Successful means that it
 - Use the tools listed above to perform validation. Something as simple as querying for the appropriate registry key after making a GPO or Intune change goes a very long way. 
 - Query all your targeted devices. If you are deploying to 500 devices, how comfortable are you that the 2 you manually checked reflect the other 498? Again, use the tools available to you. 
   - For all of our AD/EntraID deployment pilot groups for GPO/Intune changes, we create collections in ConfigMgr that sync the members so we can easily query them after each change using real-time tools like CMPivot. 
-# Summary
-This is a very lengthy post, but I did not want to separate it into multiple posts, so here is a summary of the major points below. 
-- Always test scripts and avoid modifying active production deployments to prevent outages.
-- Use lower environments that closely mirror production for safe testing.
-- Deploy policies gradually using pilots, rings, and maintenance windows; prioritize critical endpoints last.
-- Apply least privilege and separation of duties to minimize risk from human error.
-- Document all processes and metrics to ensure awareness and enforce standards.
-- Use change control (e.g., ITIL) to manage and simplify changes.
-- Automate repetitive or error-prone steps to reduce mistakes.
-- Inventory and analyze your environment before making changes; use multiple tools for complete visibility.
-- Only implement changes when truly necessary, using data to guide decisions.
-- Prepare all scripts, paperwork, and communications before implementation.
-- Validate changes thoroughly, ideally by a separate person, and use tools to confirm success across all targeted devices.
 
 # Conclusion
 All the practices outlined above are lessons learned through trial and error. Some of them I may not have been the largest supporter of at first, but over time I came to see the benefit which ended up in me and my organization's favor. You may not need all of these, but consider what makes sense in your environment. 
