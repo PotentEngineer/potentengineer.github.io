@@ -61,7 +61,7 @@ This is a very lengthy post, but I did not want to separate it into multiple pos
       2. A test/quiz that must have 80% success before granting Prod access with a meeting to review results. 
   - Newly onboarded engineers should not handle critial deployments for a period of time until they are familiar and comfortable with that level of potential impact. 
 - Use seperation of duties where possible. Only experienced engineers should handle the most critical deployments. A common mistake is a new engineer joining a team and immediately getting far-reaching privileges and breaking something. This isn't the engineers fault, but the process that allowed the engineer to break something.   
-    - The person handling implementation should not be the one performing validation. Heva the requestor perform validation or at least a separate member of the deployment team. 
+    - The person handling implementation should not be the one performing validation. Have the requestor perform validation or at least a separate member of the deployment team. 
 
 # Standards and change control
 ### Documentation
